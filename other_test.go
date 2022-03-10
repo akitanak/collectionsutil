@@ -6,6 +6,8 @@ import (
 
 func Test_ForEach(t *testing.T) {
 	t.Run("doubled", func(t *testing.T) {
+		t.Parallel()
+
 		in := []int{1, 2, 3, 4, 5}
 		want := []int{2, 4, 6, 8, 10}
 		recorder := make([]int, len(in))
@@ -43,6 +45,8 @@ func Test_Reverse(t *testing.T) {
 	for name, tc := range testCase {
 		tc := tc
 		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
 			got := Reverse(tc.in)
 
 			if len(got) != len(tc.want) {
