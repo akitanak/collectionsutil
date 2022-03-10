@@ -59,10 +59,6 @@ type Either[T any] struct {
 	left  error
 }
 
-// func (e Either[T]) String() string {
-// 	return fmt.Sprintf("{right: %v, left: %s}", e.right, e.left)
-// }
-
 func Test_FlatMap(t *testing.T) {
 	t.Run("extract comma values list", func(t *testing.T) {
 		t.Parallel()
@@ -101,6 +97,31 @@ func Test_FlatMap(t *testing.T) {
 
 			if want[i].left != nil && errors.Is(v.left, want[i].left) {
 				t.Errorf("result left(index: %d) is expected %v, but got %v", i, want[i].left, v.left)
+			}
+		}
+	})
+}
+
+func Test_Flatten(t *testing.T) {
+	t.Run("flattened nested integer list", func(t *testing.T) {
+		t.Parallel()
+
+		in := [][]int{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9},
+		}
+		want := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+		got := Flatten(in)
+
+		if len(got) != len(want) {
+			t.Errorf("expected slice have %d elements, but got %d", len(want), len(got))
+		}
+
+		for i, e := range got {
+			if e != want[i] {
+				t.Errorf("expected %d at index %d, but got %d", want[i], i, e)
 			}
 		}
 	})

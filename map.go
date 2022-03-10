@@ -16,3 +16,11 @@ func FlatMap[IN, OUT any](l []IN, fn func(v IN) []OUT) []OUT {
 	}
 	return mapped
 }
+
+func Flatten[T any](s [][]T) []T {
+	flattened := make([]T, 0)
+	for _, inner := range s {
+		flattened = append(flattened, inner...)
+	}
+	return flattened
+}
