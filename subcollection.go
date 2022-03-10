@@ -13,3 +13,7 @@ func Filter[T any](s []T, fn func(e T) bool) []T {
 func Take[T any](s []T, n int) []T {
 	return s[:n]
 }
+
+func Drop[T any](s []T, n int) []T {
+	return s[n:]
+}

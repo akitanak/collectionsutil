@@ -46,3 +46,24 @@ func Test_Take(t *testing.T) {
 		}
 	})
 }
+
+func Test_Drop(t *testing.T) {
+	t.Run("drop first 5 elements", func(t *testing.T) {
+		t.Parallel()
+
+		in := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+		num := 5
+		want := []int{6, 7, 8, 9, 10}
+
+		got := Drop(in, num)
+
+		if len(got) != num {
+			t.Errorf("expect slice have %d elements, but got %d", num, len(got))
+		}
+		for i, e := range got {
+			if e != want[i] {
+				t.Errorf("expect %d at index %d, but got %d", want[i], i, e)
+			}
+		}
+	})
+}
