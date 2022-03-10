@@ -28,3 +28,14 @@ func TakeWhile[T any](s []T, fn func(e T) bool) []T {
 	}
 	return s[:lastMatch]
 }
+
+func DropWhile[T any](s []T, fn func(e T) bool) []T {
+	lastMatch := 0
+	for _, e := range s {
+		if !fn(e) {
+			break
+		}
+		lastMatch++
+	}
+	return s[lastMatch:]
+}
