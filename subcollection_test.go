@@ -67,3 +67,25 @@ func Test_Drop(t *testing.T) {
 		}
 	})
 }
+
+func Test_TakeWhile(t *testing.T) {
+	t.Run("take while number is odd", func(t *testing.T) {
+		t.Parallel()
+
+		in := []int{1, 3, 5, 7, 2, 4, 6, 8, 10, 9}
+		want := []int{1, 3, 5, 7}
+
+		got := TakeWhile(in, func(e int) bool {
+			return e%2 == 1
+		})
+
+		if len(got) != len(want) {
+			t.Errorf("expect slice have %d elements, but got %d", len(want), len(got))
+		}
+		for i, e := range got {
+			if e != want[i] {
+				t.Errorf("expect %d at index %d, but got %d", want[i], i, e)
+			}
+		}
+	})
+}
