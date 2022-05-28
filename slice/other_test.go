@@ -1,4 +1,4 @@
-package collectionsutil
+package slice
 
 import (
 	"testing"

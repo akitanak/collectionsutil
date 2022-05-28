@@ -1,4 +1,4 @@
-package collectionsutil
+package slice
 
 // Filter filters specified slice values s with specified function fn.
 func Filter[T any](s []T, fn func(e T) bool) []T {

@@ -1,4 +1,4 @@
-package collectionsutil
+package slice
 
 // ForEach apply specified function to specified slice values.
 func ForEach[T any](s []T, fn func(e T)) {

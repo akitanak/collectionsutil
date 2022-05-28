@@ -1,4 +1,4 @@
-package collectionsutil
+package slice
 
 // SplitAt splits slice at specified index.
 func SplitAt[T any](s []T, n int) ([]T, []T) {

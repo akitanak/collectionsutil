@@ -1,4 +1,4 @@
-package collectionsutil
+package slice
 
 // Numeric represents numerics.
 type Numeric interface {
