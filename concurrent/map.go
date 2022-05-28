@@ -2,6 +2,7 @@ package concurrent
 
 import "sync"
 
+// Map maps input slice values to output slice values `l` with specified function `fn` concurrently.
 func Map[IN, OUT any](s []IN, fn func(v IN) OUT) []OUT {
 	mapped := make([]OUT, len(s))
 	wg := sync.WaitGroup{}
@@ -17,6 +18,7 @@ func Map[IN, OUT any](s []IN, fn func(v IN) OUT) []OUT {
 	return mapped
 }
 
+// FlatMap maps input slice values `l` with specified function `fn` that returns slice and flatten slices concurrently.
 func FlatMap[IN, OUT any](s []IN, fn func(v IN) []OUT) []OUT {
 	mutex := &sync.Mutex{}
 	mapped := make(map[int][]OUT, 0)

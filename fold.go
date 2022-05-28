@@ -2,6 +2,7 @@ package collectionsutil
 
 import "fmt"
 
+// FoldLeft applies a binary operator `fn` start value `z` and all elements of slice `s`, going left to right.
 func FoldLeft[IN, OUT any](s []IN, z OUT, fn func(acc OUT, in IN) OUT) OUT {
 	acc := z
 	for _, v := range s {
@@ -10,6 +11,7 @@ func FoldLeft[IN, OUT any](s []IN, z OUT, fn func(acc OUT, in IN) OUT) OUT {
 	return acc
 }
 
+// FoldLeft applies a binary operator `fn` start value `z` and all elements of slice `s`, going right to left.
 func FoldRight[IN, OUT any](s []IN, z OUT, fn func(in IN, acc OUT) OUT) OUT {
 	acc := z
 	for i := len(s); i > 0; i-- {
@@ -18,6 +20,7 @@ func FoldRight[IN, OUT any](s []IN, z OUT, fn func(in IN, acc OUT) OUT) OUT {
 	return acc
 }
 
+// ReduceLeft applies a binary operator `fn` all elements of slice `s`, going left to right.
 func ReduceLeft[T any](s []T, fn func(acc T, in T) T) (T, error) {
 	var acc T
 	if len(s) < 1 {
@@ -30,6 +33,7 @@ func ReduceLeft[T any](s []T, fn func(acc T, in T) T) (T, error) {
 	return acc, nil
 }
 
+// ReduceLeft applies a binary operator `fn` all elements of slice `s`, going right to left.
 func ReduceRight[T any](s []T, fn func(in T, acc T) T) (T, error) {
 	var acc T
 	if len(s) < 1 {
