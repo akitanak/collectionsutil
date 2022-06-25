@@ -1,4 +1,4 @@
-package slice
+package sliceutil
 
 // Map maps input slice values to output slice values `l` with specified function `fn`.
 func Map[IN, OUT any](s []IN, fn func(v IN) OUT) []OUT {
