@@ -1,6 +1,7 @@
 package maputil
 
 import (
+	"fmt"
 	"sort"
 	"testing"
 )
@@ -332,6 +333,62 @@ func Test_Transform(t *testing.T) {
 			t.Parallel()
 
 			got := Transform(tc.inMap, tc.inTransformFn)
+
+			if len(got) != len(tc.want) {
+				t.Errorf("expect %v, but got %v", tc.want, got)
+			}
+
+			for k, v := range got {
+				if v != tc.want[k] {
+					t.Errorf("expect %v, but got %v", tc.want[k], v)
+				}
+			}
+		})
+	}
+}
+
+func Test_MapValues(t *testing.T) {
+	testcases := map[string]struct {
+		inMap   map[string]int
+		inMapFn func(string, int) string
+		want    map[string]string
+	}{
+		"if empty map, returns empty map": {
+			inMap:   map[string]int{},
+			inMapFn: func(k string, v int) string { return fmt.Sprintf("%v", v) },
+			want:    map[string]string{},
+		},
+		"if map contains matched key, returns a map which has correspond key": {
+			inMap: map[string]int{
+				"a": 1,
+			},
+			inMapFn: func(k string, v int) string { return fmt.Sprintf("%v", v) },
+			want: map[string]string{
+				"a": "1",
+			},
+		},
+		"if map contains some matched keys, returns a map which has correspond keys": {
+			inMap: map[string]int{
+				"a": 1,
+				"b": 2,
+				"c": 3,
+			},
+			inMapFn: func(k string, v int) string { return fmt.Sprintf("%v", v) },
+			want: map[string]string{
+				"a": "1",
+				"b": "2",
+				"c": "3",
+			},
+		},
+	}
+
+	for name, tc := range testcases {
+		tc := tc
+
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			got := MapValues(tc.inMap, tc.inMapFn)
 
 			if len(got) != len(tc.want) {
 				t.Errorf("expect %v, but got %v", tc.want, got)

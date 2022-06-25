@@ -68,3 +68,11 @@ func Transform[K comparable, V any](m map[K]V, transformFn func(k K, v V) V) map
 	}
 	return transformed
 }
+
+func MapValues[K comparable, V any, W any](m map[K]V, mapFn func(k K, v V) W) map[K]W {
+	mapped := make(map[K]W)
+	for k, v := range m {
+		mapped[k] = mapFn(k, v)
+	}
+	return mapped
+}
